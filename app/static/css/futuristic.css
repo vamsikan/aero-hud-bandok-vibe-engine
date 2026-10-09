@@ -1,0 +1,782 @@
+/* ==========================================================================
+   AERO·HUD // Futuristic Cycling Telemetry Stylesheet
+   Designed for Basso Venta R & Hyderabad Financial District Pelotón
+   ========================================================================== */
+
+:root {
+  --bg-deep: #07090e;
+  --bg-card: rgba(13, 17, 27, 0.75);
+  --bg-panel: rgba(20, 26, 42, 0.65);
+  --border-neon: rgba(0, 245, 212, 0.35);
+  --border-glow: 0 0 15px rgba(0, 245, 212, 0.25);
+  
+  --cyan-neon: #00f5d4;
+  --cyan-glow: #00e5ff;
+  --aero-green: #00ff88;
+  --laser-orange: #ff9f1c;
+  --italian-red: #ff3366;
+  --text-primary: #f0f4f8;
+  --text-muted: #8b9bb4;
+  --text-dim: #4f5d75;
+  
+  --font-hud: 'Orbitron', 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(0, 245, 212, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(255, 51, 102, 0.05) 0%, transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Subtle Animated Scanline Overlay */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 999;
+  opacity: 0.35;
+}
+
+/* Container */
+.hud-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 80px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Header & Cockpit Telemetry Bar
+   ========================================================================== */
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 245, 212, 0.2);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.hud-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 180px;
+  height: 2px;
+  background: var(--cyan-neon);
+  box-shadow: 0 0 10px var(--cyan-neon);
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.steed-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--cyan-neon);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 245, 212, 0.1);
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
+}
+
+.brand-title {
+  font-family: var(--font-hud);
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-title span {
+  color: var(--cyan-neon);
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.italian-pill {
+  color: var(--italian-red);
+  font-weight: 600;
+}
+
+.header-status-panel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--aero-green);
+  background: rgba(0, 255, 136, 0.08);
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--aero-green);
+  box-shadow: 0 0 8px var(--aero-green);
+  animation: pulseAnim 1.8s infinite;
+}
+
+@keyframes pulseAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.btn-icon-hud {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-icon-hud:hover {
+  border-color: var(--cyan-neon);
+  color: var(--cyan-neon);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+}
+
+/* ==========================================================================
+   Category & Vibe Filter Navigation
+   ========================================================================== */
+.vibe-nav-section {
+  margin-bottom: 24px;
+}
+
+.section-label {
+  font-family: var(--font-hud);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '>';
+  color: var(--cyan-neon);
+  font-weight: 700;
+}
+
+.vibe-pills-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan-neon) transparent;
+}
+
+.vibe-pill {
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.vibe-pill:hover {
+  border-color: rgba(0, 245, 212, 0.4);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.vibe-pill.active {
+  background: rgba(0, 245, 212, 0.12);
+  border-color: var(--cyan-neon);
+  color: var(--cyan-neon);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.25);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Telemetry Injection Bar (Collapsible / HUD Inputs)
+   ========================================================================== */
+.telemetry-cockpit {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 245, 212, 0.25);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.telemetry-cockpit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan-neon), transparent);
+}
+
+.cockpit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.cockpit-presets {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-preset {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-preset:hover {
+  border-color: var(--laser-orange);
+  color: var(--laser-orange);
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.hud-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-input-group label {
+  font-family: var(--font-hud);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hud-input-field {
+  background: rgba(8, 11, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.hud-input-field:focus {
+  border-color: var(--cyan-neon);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+  background: rgba(12, 16, 26, 0.95);
+}
+
+/* ==========================================================================
+   Central HUD Quote Display
+   ========================================================================== */
+.quote-display-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-neon);
+  box-shadow: var(--border-glow), 0 15px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+  transition: all 0.3s ease;
+}
+
+/* Corner HUD brackets */
+.corner-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--cyan-neon);
+  border-style: solid;
+  pointer-events: none;
+}
+.bracket-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+.bracket-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.bracket-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+.bracket-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+.quote-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quote-badge-source {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan-neon);
+  background: rgba(0, 245, 212, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  letter-spacing: 1px;
+}
+
+.quote-action-cluster {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-star {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-star:hover, .btn-star.starred {
+  border-color: var(--laser-orange);
+  color: var(--laser-orange);
+  box-shadow: 0 0 10px rgba(255, 159, 28, 0.3);
+}
+
+.quote-headline-text {
+  font-family: var(--font-hud);
+  font-size: 1.85rem;
+  line-height: 1.35;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.quote-subtext-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* Character Fitting Telemetry Gauges */
+.character-gauges-row {
+  display: flex;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 28px;
+}
+
+.gauge-item {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gauge-bar-bg {
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  background: var(--cyan-neon);
+  box-shadow: 0 0 6px var(--cyan-neon);
+}
+
+/* Main Action Launchpad */
+.action-launchpad {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-cyber-primary {
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.2), rgba(0, 229, 255, 0.35));
+  border: 1px solid var(--cyan-neon);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: var(--font-hud);
+  font-size: 0.88rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-cyber-primary:hover {
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.35), rgba(0, 229, 255, 0.5));
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-cyber-primary:active {
+  transform: translateY(0);
+}
+
+.btn-cyber-action {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-cyber-action:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-strava {
+  border-color: rgba(252, 76, 2, 0.4);
+  color: #fc4c02;
+}
+
+.btn-strava:hover {
+  border-color: #fc4c02;
+  box-shadow: 0 0 15px rgba(252, 76, 2, 0.3);
+}
+
+.btn-whatsapp {
+  border-color: rgba(37, 211, 102, 0.4);
+  color: #25d366;
+}
+
+.btn-whatsapp:hover {
+  border-color: #25d366;
+  box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+}
+
+/* ==========================================================================
+   Export Formats Grid (Strava, WhatsApp Status, Broadcast)
+   ========================================================================== */
+.export-formats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.export-card {
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 18px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.export-card:hover {
+  border-color: rgba(0, 245, 212, 0.3);
+}
+
+.export-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.export-target-name {
+  font-family: var(--font-hud);
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-copy-small {
+  background: rgba(0, 245, 212, 0.08);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  color: var(--cyan-neon);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-copy-small:hover {
+  background: var(--cyan-neon);
+  color: var(--bg-deep);
+  box-shadow: 0 0 10px var(--cyan-neon);
+}
+
+.export-preview-box {
+  background: rgba(7, 9, 14, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  white-space: pre-wrap;
+  min-height: 80px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   Alternatives Stream
+   ========================================================================== */
+.alternatives-section {
+  margin-bottom: 32px;
+}
+
+.alternatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.alt-card {
+  background: rgba(15, 20, 32, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alt-card:hover {
+  border-color: var(--cyan-neon);
+  background: rgba(20, 26, 42, 0.8);
+  transform: translateY(-2px);
+}
+
+.alt-headline {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.alt-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan-neon);
+}
+
+/* ==========================================================================
+   Canvas Graphic Modal
+   ========================================================================== */
+.hud-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 7, 11, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.hud-modal-overlay.open {
+  display: flex;
+}
+
+.hud-modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--cyan-neon);
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.3);
+  border-radius: 14px;
+  max-width: 800px;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 1.5px;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+#socialCanvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Toast Notifications */
+.hud-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(13, 17, 27, 0.95);
+  border: 1px solid var(--cyan-neon);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hud-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .quote-headline-text {
+    font-size: 1.35rem;
+  }
+  .telemetry-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

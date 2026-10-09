@@ -1,0 +1,9 @@
+services:
+  aero-hud:
+    build: .
+    container_name: aero-hud-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

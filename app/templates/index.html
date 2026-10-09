@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ app_name }} // Strava & WhatsApp Status Engine</title>
+  
+  <!-- Futuristic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/css/futuristic.css">
+</head>
+<body>
+
+  <!-- Subtle Scanline Layer -->
+  <div class="scanline-overlay"></div>
+
+  <div class="hud-container">
+
+    <!-- ====================================================================
+         HUD Header & Pelotón Cockpit Bar
+         ==================================================================== -->
+    <header class="hud-header">
+      <div class="brand-badge">
+        <div class="steed-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-width="2">
+            <circle cx="5.5" cy="17.5" r="3.5"/>
+            <circle cx="18.5" cy="17.5" r="3.5"/>
+            <path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L8.5 11l3-5h3.5"/>
+            <path d="M12 17.5V14l4-3 2.5 6.5"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">AERO<span>·HUD</span></h1>
+          <div class="brand-subtitle">
+            <span>{{ default_bike }}</span>
+            <span>•</span>
+            <span class="italian-pill">🇮🇹 ITALIAN RACING HERITAGE</span>
+            <span>•</span>
+            <span>HYDERABAD FD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-status-panel">
+        <div class="live-indicator">
+          <div class="pulse-dot"></div>
+          <span>BANDÓK ENGINE // ONLINE</span>
+        </div>
+        <button id="btnAudioToggle" class="btn-icon-hud" title="Toggle Synthesizer Audio">
+          🔊 SFX: ON
+        </button>
+        <button id="btnOpenCustomModal" class="btn-icon-hud" title="Add Custom Pelotón Quote">
+          ➕ CUSTOM QUOTE
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         Vibe & Category Navigation
+         ==================================================================== -->
+    <section class="vibe-nav-section">
+      <div class="section-label">SELECT VIBE TELEMETRY</div>
+      <div id="vibeContainer" class="vibe-pills-container">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Telemetry Injection Cockpit
+         ==================================================================== -->
+    <section class="telemetry-cockpit">
+      <div class="cockpit-header">
+        <div class="section-label" style="margin-bottom: 0;">RIDE TELEMETRY & PRESETS</div>
+        <div class="cockpit-presets">
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);">QUICK LOOPS:</span>
+          <button class="btn-preset" data-dist="42" data-speed="32.5" data-elev="210" data-loc="Kokapet Solar Roof Cycling Track">
+            ⚡ Solar Track TT (42km)
+          </button>
+          <button class="btn-preset" data-dist="35" data-speed="29.0" data-elev="380" data-loc="Waverock Rolling Gradients">
+            ⛰️ Waverock Climbs (35km)
+          </button>
+          <button class="btn-preset" data-dist="28" data-speed="33.8" data-elev="140" data-loc="Durgam Cheruvu Cable Bridge Sunrise">
+            🌉 Cable Bridge Sprint (28km)
+          </button>
+          <button class="btn-preset" data-dist="48" data-speed="30.5" data-elev="290" data-loc="Niloufer Post-Ride Irani Chai Pitstop">
+            ☕ Niloufer Chai Loop (48km)
+          </button>
+        </div>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="hud-input-group">
+          <label>Distance (KM)</label>
+          <input type="number" id="inputDist" class="hud-input-field" value="42.5" step="0.5" min="0">
+        </div>
+        <div class="hud-input-group">
+          <label>Avg Speed (KM/H)</label>
+          <input type="number" id="inputSpeed" class="hud-input-field" value="31.8" step="0.1" min="0">
+        </div>
+        <div class="hud-input-group">
+          <label>Elevation (M)</label>
+          <input type="number" id="inputElev" class="hud-input-field" value="260" min="0">
+        </div>
+        <div class="hud-input-group" style="grid-column: span 2;">
+          <label>Location / Route</label>
+          <select id="inputLocation" class="hud-input-field">
+            {% for landmark in landmarks %}
+              <option value="{{ landmark }}">{{ landmark }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="hud-input-group">
+          <label>Steed</label>
+          <input type="text" id="inputBike" class="hud-input-field" value="{{ default_bike }}">
+        </div>
+        <div class="hud-input-group">
+          <label>Suffer Score (1-10)</label>
+          <input type="number" id="inputSuffer" class="hud-input-field" value="8" min="1" max="10">
+        </div>
+        <div class="hud-input-group">
+          <label>Irani Chai (Cups)</label>
+          <input type="number" id="inputChai" class="hud-input-field" value="2" min="0" max="6">
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Central HUD Quote Display
+         ==================================================================== -->
+    <main class="quote-display-card">
+      <!-- High-tech corner brackets -->
+      <div class="corner-bracket bracket-tl"></div>
+      <div class="corner-bracket bracket-tr"></div>
+      <div class="corner-bracket bracket-bl"></div>
+      <div class="corner-bracket bracket-br"></div>
+
+      <div class="quote-meta-row">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span id="quoteVibeBadge" class="quote-badge-source">BANDÓK VAULT</span>
+          <span id="quoteTagsBadge" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);">#aero #basso</span>
+        </div>
+        <div class="quote-action-cluster">
+          <button id="starBtn" class="btn-star" title="Save to favorites">☆</button>
+        </div>
+      </div>
+
+      <h2 id="quoteHeadline" class="quote-headline-text">
+        Loading Aero Telemetry...
+      </h2>
+      <p id="quoteSubtext" class="quote-subtext-text">
+        Synchronizing with Bassano del Grappa & Deccan asphalt.
+      </p>
+
+      <!-- Fitting Telemetry Gauges -->
+      <div class="character-gauges-row">
+        <div class="gauge-item">
+          <span>STRAVA TITLE FIT:</span>
+          <div class="gauge-bar-bg">
+            <div id="stravaGaugeFill" class="gauge-bar-fill" style="width: 50%;"></div>
+          </div>
+          <span id="stravaGaugeText">32/60 chars</span>
+        </div>
+        <div class="gauge-item">
+          <span>WHATSAPP STATUS FIT:</span>
+          <div class="gauge-bar-bg">
+            <div id="waGaugeFill" class="gauge-bar-fill" style="width: 40%; background: var(--aero-green);"></div>
+          </div>
+          <span id="waGaugeText">55/139 chars</span>
+        </div>
+      </div>
+
+      <!-- Action Launchpad -->
+      <div class="action-launchpad">
+        <button id="btnGenerate" class="btn-cyber-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+          </svg>
+          ROLL QUOTE [SPACEBAR / R]
+        </button>
+
+        <button id="btnSocialCard" class="btn-cyber-action">
+          🎨 EXPORT HUD SOCIAL CARD
+        </button>
+
+        <button id="btnOpenWhatsApp" class="btn-cyber-action btn-whatsapp">
+          💬 SEND TO WHATSAPP
+        </button>
+      </div>
+    </main>
+
+    <!-- ====================================================================
+         Export Formats Grid
+         ==================================================================== -->
+    <div class="section-label">1-CLICK CLIPBOARD EXPORT FORMATS</div>
+    <section class="export-formats-grid">
+      <!-- 1. Strava Title -->
+      <div class="export-card">
+        <div class="export-card-header">
+          <div class="export-target-name">
+            <span style="color: #fc4c02;">●</span> STRAVA TITLE
+          </div>
+          <button class="btn-copy-small" data-copy-target="strava-title">COPY TITLE</button>
+        </div>
+        <div id="stravaTitlePreview" class="export-preview-box"></div>
+      </div>
+
+      <!-- 2. Strava Full Activity Description -->
+      <div class="export-card">
+        <div class="export-card-header">
+          <div class="export-target-name">
+            <span style="color: #fc4c02;">●</span> STRAVA FULL CARD
+          </div>
+          <button class="btn-copy-small" data-copy-target="strava-full">COPY FULL</button>
+        </div>
+        <div id="stravaDescPreview" class="export-preview-box"></div>
+      </div>
+
+      <!-- 3. WhatsApp Status -->
+      <div class="export-card">
+        <div class="export-card-header">
+          <div class="export-target-name">
+            <span style="color: #25d366;">●</span> WHATSAPP STATUS
+          </div>
+          <button class="btn-copy-small" data-copy-target="whatsapp-status">COPY STATUS</button>
+        </div>
+        <div id="whatsappStatusPreview" class="export-preview-box"></div>
+      </div>
+
+      <!-- 4. WhatsApp Group Broadcast -->
+      <div class="export-card">
+        <div class="export-card-header">
+          <div class="export-target-name">
+            <span style="color: #25d366;">●</span> WHATSAPP PELOTÓN CHAT
+          </div>
+          <button class="btn-copy-small" data-copy-target="whatsapp-chat">COPY CHAT</button>
+        </div>
+        <div id="whatsappChatPreview" class="export-preview-box"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         Alternatives Stream
+         ==================================================================== -->
+    <div class="section-label">QUICK ALTERNATIVES IN QUEUE</div>
+    <section class="alternatives-section">
+      <div id="alternativesList" class="alternatives-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+  </div> <!-- /hud-container -->
+
+  <!-- ====================================================================
+       Modal: Social Canvas Card Generator
+       ==================================================================== -->
+  <div id="cardModal" class="hud-modal-overlay">
+    <div class="hud-modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">AERO TELEMETRY // SOCIAL CARD</h3>
+        <button id="btnCloseModal" class="btn-icon-hud">✕</button>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="socialCanvas" width="1080" height="1080"></canvas>
+      </div>
+      <div class="modal-actions">
+        <button id="btnDownloadCard" class="btn-cyber-primary">
+          💾 DOWNLOAD HI-RES PNG
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       Modal: Custom Pelotón Quote
+       ==================================================================== -->
+  <div id="customModal" class="hud-modal-overlay">
+    <div class="hud-modal-card" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 class="modal-title">ADD CUSTOM PELOTÓN QUOTE</h3>
+        <button id="btnCloseCustomModal" class="btn-icon-hud">✕</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+        <div class="hud-input-group">
+          <label>Punchline / Headline</label>
+          <input type="text" id="customHeadline" class="hud-input-field" placeholder="e.g. Kokapet wind was brutal, legs were stubborn.">
+        </div>
+        <div class="hud-input-group">
+          <label>Subtext / Context (Optional)</label>
+          <input type="text" id="customSubtext" class="hud-input-field" placeholder="e.g. Sprinted past the 5:30 AM mist.">
+        </div>
+        <div class="hud-input-group">
+          <label>Category</label>
+          <select id="customCategory" class="hud-input-field">
+            <option value="hyd_fd_grit">Hyderabad FD Grit</option>
+            <option value="basso_aero">Basso Venta R Aero</option>
+            <option value="bandok_classic">Bandók Classic</option>
+            <option value="pain_cave">Pain Cave</option>
+            <option value="chai_recovery">Chai Recovery</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="btnSaveCustomQuote" class="btn-cyber-primary">
+          ➕ INJECT INTO LIVE POOL
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="hudToast" class="hud-toast">
+    <span id="toastMsg">Telemetry copied</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/sound.js"></script>
+  <script src="/static/js/canvas_card.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
