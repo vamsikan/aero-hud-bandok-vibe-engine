@@ -97,7 +97,7 @@ class HudCardRenderer {
 
     ctx.fillStyle = '#00f5d4';
     ctx.font = '14px "JetBrains Mono", monospace';
-    ctx.fillText(`HYD FINANCIAL DISTRICT // ${timestamp}`, 125, 94);
+    ctx.fillText(`ROAD CYCLING // ${timestamp}`, 125, 94);
 
     // Bandók Vault Stamp on Right
     ctx.fillStyle = 'rgba(255, 159, 28, 0.9)';
@@ -146,10 +146,10 @@ class HudCardRenderer {
     ctx.fillRect(60, telemetryY, this.width - 120, 160);
 
     const stats = [
-      { label: 'DISTANCE', val: dist, color: '#00f5d4' },
-      { label: 'AVG SPEED', val: speed, color: '#39ff14' },
-      { label: 'ELEVATION', val: elevation, color: '#ff9f1c' },
-      { label: 'SECTOR', val: 'HYD FD', color: '#ffffff' },
+      { label: 'DISCIPLINE', val: 'ROAD', color: '#00f5d4' },
+      { label: 'STEED', val: 'BASSO', color: '#39ff14' },
+      { label: 'VIBE', val: 'AERO', color: '#ff9f1c' },
+      { label: 'CADENCE', val: 'FLOW', color: '#ffffff' },
     ];
 
     const colWidth = (this.width - 120) / stats.length;
@@ -173,11 +173,11 @@ class HudCardRenderer {
     // 7. Route & Footer Signature
     ctx.fillStyle = '#8b9bb4';
     ctx.font = '14px "JetBrains Mono", monospace';
-    ctx.fillText(`📍 ${location}`, 80, this.height - 52);
+    ctx.fillText(`🇮🇹 Pure Italian Racing Soul`, 80, this.height - 52);
 
     ctx.textAlign = 'right';
     ctx.fillStyle = 'rgba(0, 245, 212, 0.7)';
-    ctx.fillText('#BassoVentaR #Bandók #HydCycling #AeroHUD', this.width - 80, this.height - 52);
+    ctx.fillText('#BassoVentaR #Bandók #RoadCycling #AeroHUD', this.width - 80, this.height - 52);
     ctx.textAlign = 'left';
   }
 

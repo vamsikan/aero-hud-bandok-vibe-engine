@@ -1,6 +1,10 @@
-"""Curated repository of cycling quotes.
+"""Curated repository of pure cycling quotes.
 Inspired by Bandók (bandok.com) styling: movie quotes, dry wit, cycling suffering,
-blended with Italian aero passion (Basso Venta R) and Hyderabad Financial District grit.
+Italian aero passion (Basso Venta R), morning discipline, and post-ride rituals.
+
+STRICT STANDARD:
+Zero location names. Zero embedded distance/speed data.
+Pure, punchy, high-impact quotes ready for Strava and WhatsApp status.
 """
 from typing import List, Dict, Any
 from app.models.quote import QuoteCategory
@@ -28,7 +32,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bdk-003",
         "headline": "Destiny is the one doing the folding; we’re just the origami swans.",
-        "subtext": "Folded neatly into the aero drops for 40 kilometers.",
+        "subtext": "Folded neatly into the aero drops for the entire morning.",
         "category": QuoteCategory.BANDOK_CLASSIC,
         "source_vibe": "Bandók Vault // Existential Aero",
         "tags": ["bandok", "philosophical", "aero", "destiny"],
@@ -76,7 +80,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bdk-009",
         "headline": "Tell the gradient I wasn't listening.",
-        "subtext": "Out of the saddle. Defiant to the finish line.",
+        "subtext": "Out of the saddle. Defiant to the crest.",
         "category": QuoteCategory.BANDOK_CLASSIC,
         "source_vibe": "Bandók Vault // Climb Defiance",
         "tags": ["bandok", "climbing", "attitude", "hills"],
@@ -84,98 +88,138 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bdk-010",
         "headline": "Aerodynamics is a polite agreement between drag and stubbornness.",
-        "subtext": "Today, stubbornness won by 2.4 seconds.",
+        "subtext": "Today, stubbornness won convincingly.",
         "category": QuoteCategory.BANDOK_CLASSIC,
         "source_vibe": "Bandók Vault // Wind Tunnel Logic",
         "tags": ["bandok", "aero", "physics", "stubborn"],
     },
+    {
+        "id": "bdk-011",
+        "headline": "I'm not superstitious, but I am a little stitious about clean chains.",
+        "subtext": "Drivetrain purring like a well-fed housecat.",
+        "category": QuoteCategory.BANDOK_CLASSIC,
+        "source_vibe": "Bandók Vault // Dunder Mifflin Creed",
+        "tags": ["bandok", "humor", "the-office", "chain"],
+    },
+    {
+        "id": "bdk-012",
+        "headline": "Anybody interested in grabbing a couple of burgers and hitting the pain cave?",
+        "subtext": "Questionable dietary logic, impeccable commitment.",
+        "category": QuoteCategory.BANDOK_CLASSIC,
+        "source_vibe": "Bandók Vault // Cult Classic",
+        "tags": ["bandok", "humor", "cult-quote", "pain-cave"],
+    },
+    {
+        "id": "bdk-013",
+        "headline": "Pain is just French for bread. And I am baking heavily.",
+        "subtext": "Calves currently operating at maximum oven temperature.",
+        "category": QuoteCategory.BANDOK_CLASSIC,
+        "source_vibe": "Bandók Vault // Wordplay",
+        "tags": ["bandok", "wordplay", "pain", "baking"],
+    },
+    {
+        "id": "bdk-014",
+        "headline": "I feel the need... the need for cadence.",
+        "subtext": "Tower, this is Ghost Rider requesting a big ring flyby.",
+        "category": QuoteCategory.BANDOK_CLASSIC,
+        "source_vibe": "Bandók Vault // Top Gun Aero",
+        "tags": ["bandok", "top-gun", "speed", "cadence"],
+    },
+    {
+        "id": "bdk-015",
+        "headline": "Rule #1: Look cool. Rule #2: Don't get dropped. Rule #3: If dropped, refer to Rule #1.",
+        "subtext": "Aesthetic integrity maintained at all heart rates.",
+        "category": QuoteCategory.BANDOK_CLASSIC,
+        "source_vibe": "Bandók Vault // Velominati Code",
+        "tags": ["bandok", "rules", "style", "peloton"],
+    },
 
     # =========================================================================
-    # 2. HYDERABAD FINANCIAL DISTRICT GRIT (Local culture, FD, Kokapet, Cable Bridge)
+    # 2. DAWN GRIT & MORNING DISCIPLINE (Pure grit, early mornings, no locations)
     # =========================================================================
     {
-        "id": "hyd-101",
-        "headline": "Dodging corporate burnout and Kokapet dumpers simultaneously.",
-        "subtext": "Financial District morning circuit: The true endurance test.",
+        "id": "grt-101",
+        "headline": "Dodging corporate burnout before the world even logs into Slack.",
+        "subtext": "Cleared my sprint backlog on two wheels before the morning standup.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Morning Survival",
-        "tags": ["hyderabad", "financial-district", "kokapet", "morning-ride"],
+        "source_vibe": "Dawn Pelotón // Corporate Escape",
+        "tags": ["morning", "discipline", "dawn", "grit"],
     },
     {
-        "id": "hyd-102",
-        "headline": "4 days a week on ORR service roads: Cheaper than therapy, faster than tech syncs.",
-        "subtext": "Cleared my sprint backlog before the 9:30 AM standup.",
+        "id": "grt-102",
+        "headline": "4 days a week on two wheels: Cheaper than therapy, faster than any corporate sync.",
+        "subtext": "Pedaling away from meetings that could have been emails.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Tech Corridor",
-        "tags": ["hyderabad", "orr", "routine", "tech-life"],
+        "source_vibe": "Dawn Pelotón // High Cadence Cure",
+        "tags": ["discipline", "routine", "freedom", "escape"],
     },
     {
-        "id": "hyd-103",
-        "headline": "Waverock gradient: Where IT architects learn what true structural stress means.",
+        "id": "grt-103",
+        "headline": "Climbing gradients: Where architects learn what true structural stress actually means.",
         "subtext": "Heart rate higher than cloud hosting bills.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Waverock Climb",
-        "tags": ["hyderabad", "waverock", "climb", "gradients"],
+        "source_vibe": "Dawn Pelotón // Structural Stress",
+        "tags": ["climbing", "gradients", "stress", "heart-rate"],
     },
     {
-        "id": "hyd-104",
-        "headline": "Cable Bridge at 5:45 AM hits different when your Garmin beeps 178 bpm.",
-        "subtext": "Durgam Cheruvu glow fading as the big ring drops.",
+        "id": "grt-104",
+        "headline": "Suspension bridges in the morning mist hit different when your heart rate redlines.",
+        "subtext": "City glow fading as the big ring drops.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Cable Bridge Aero",
-        "tags": ["hyderabad", "cable-bridge", "durgam-cheruvu", "garmin"],
+        "source_vibe": "Dawn Pelotón // Mist & Tarmac",
+        "tags": ["morning", "mist", "redline", "speed"],
     },
     {
-        "id": "hyd-105",
-        "headline": "The Kokapet Solar Cycling Track is green energy; my calves are pure nuclear fission.",
-        "subtext": "Smooth tarmac beneath the panels, pure wattage above.",
+        "id": "grt-105",
+        "headline": "The morning sun provides green energy; my calves are pure nuclear fission.",
+        "subtext": "Smooth tarmac beneath the wheels, pure wattage above.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Solar Roof Track",
-        "tags": ["hyderabad", "solar-track", "kokapet", "wattage"],
+        "source_vibe": "Dawn Pelotón // Nuclear Cadence",
+        "tags": ["energy", "wattage", "calves", "power"],
     },
     {
-        "id": "hyd-106",
-        "headline": "Knowledge City sprint: 0 knowledge gained, 100% lactic acid harvested.",
-        "subtext": "Racing the IT shuttle buses and taking podium positions.",
+        "id": "grt-106",
+        "headline": "Sprint finish: 0 tactical intelligence, 100% lactic acid harvested.",
+        "subtext": "Out of the saddle like there's an Olympic podium at the end of the road.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Knowledge City",
-        "tags": ["hyderabad", "knowledge-city", "sprint", "speed"],
+        "source_vibe": "Dawn Pelotón // Sprint Mentality",
+        "tags": ["sprint", "lactic-acid", "effort", "podium"],
     },
     {
-        "id": "hyd-107",
-        "headline": "Beat the 8 AM Gachibowli gridlock by already being exhausted at 7 AM.",
-        "subtext": "They're honking in traffic; I'm sipping hot Irani chai.",
+        "id": "grt-107",
+        "headline": "Beat the morning city gridlock by already being delightfully exhausted before breakfast.",
+        "subtext": "They're honking in traffic; I'm cooling down with hot chai.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Gachibowli Flow",
-        "tags": ["hyderabad", "gachibowli", "traffic", "early-bird"],
+        "source_vibe": "Dawn Pelotón // Early Bird Victory",
+        "tags": ["early-bird", "gridlock", "breakfast", "peace"],
     },
     {
-        "id": "hyd-108",
-        "headline": "Khajaguda hills don't negotiate with your sprint cadence.",
-        "subtext": "Standing on the pedals, chasing the sunrise over the IT towers.",
+        "id": "grt-108",
+        "headline": "Steep rollers don't negotiate with your sprint cadence.",
+        "subtext": "Standing on the pedals, chasing the sunrise over the skyline.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Khajaguda Hills",
-        "tags": ["hyderabad", "khajaguda", "hills", "sunrise"],
+        "source_vibe": "Dawn Pelotón // Roller Defiance",
+        "tags": ["hills", "cadence", "sunrise", "rollers"],
     },
     {
-        "id": "hyd-109",
-        "headline": "Nanakramguda roundabout is my velodrome, the morning fog is my spectator.",
-        "subtext": "Turning FD asphalt into personal time-trial territory.",
+        "id": "grt-109",
+        "headline": "Empty morning roundabouts are my velodrome, the morning fog is my spectator.",
+        "subtext": "Turning asphalt into personal time-trial territory.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Nanakramguda TT",
-        "tags": ["hyderabad", "nanakramguda", "fog", "crit"],
+        "source_vibe": "Dawn Pelotón // Solo Velodrome",
+        "tags": ["fog", "time-trial", "crit", "flow"],
     },
     {
-        "id": "hyd-110",
-        "headline": "Bio-Diversity flyover descent: Reaching orbital velocity before Hyderabad wakes up.",
+        "id": "grt-110",
+        "headline": "Empty flyovers at dawn: Reaching orbital velocity before the city wakes up.",
         "subtext": "Aero tucked past the sleeping glass-facade towers.",
         "category": QuoteCategory.HYD_FD_GRIT,
-        "source_vibe": "Hyderabad FD Pelotón // Flyover Aero",
-        "tags": ["hyderabad", "biodiversity", "descent", "speed"],
+        "source_vibe": "Dawn Pelotón // Orbital Tuck",
+        "tags": ["descent", "flyover", "speed", "aero"],
     },
 
     # =========================================================================
-    # 3. BASSO VENTA R AERO (Italian racing heritage, geometry, carbon stiffness)
+    # 3. BASSO VENTA R AERO (Italian racing soul, carbon stiffness, aero cockpit)
     # =========================================================================
     {
         "id": "bso-201",
@@ -188,10 +232,10 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bso-202",
         "headline": "Basso Venta R: 8.5 kg of Italian precision, 75 kg of questionable decisions.",
-        "subtext": "Designed in Bassano del Grappa, unleashed on Financial District tarmac.",
+        "subtext": "Handcrafted in Bassano del Grappa, unleashed on morning asphalt.",
         "category": QuoteCategory.BASSO_AERO,
         "source_vibe": "Bassano del Grappa // Race Precision",
-        "tags": ["basso", "venta-r", "weight", "engineering"],
+        "tags": ["basso", "venta-r", "engineering", "precision"],
     },
     {
         "id": "bso-203",
@@ -203,7 +247,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     },
     {
         "id": "bso-204",
-        "headline": "Microtech wheels humming at 36 km/h. Pure Italian mechanical orchestra.",
+        "headline": "Microtech wheels humming like angry hornets. Pure mechanical orchestra.",
         "subtext": "No playlist required when the hub engagement sounds like a swarm of wasps.",
         "category": QuoteCategory.BASSO_AERO,
         "source_vibe": "Bassano del Grappa // Hub Acoustics",
@@ -220,7 +264,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bso-206",
         "headline": "Toray carbon stiffness: Every watt delivered directly to the asphalt, no refund asked.",
-        "subtext": "Power transfer so direct my quads filed a complaint.",
+        "subtext": "Power transfer so direct my quads filed an official grievance.",
         "category": QuoteCategory.BASSO_AERO,
         "source_vibe": "Bassano del Grappa // Bottom Bracket Power",
         "tags": ["basso", "carbon", "wattage", "stiffness"],
@@ -228,14 +272,22 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "bso-207",
         "headline": "Look fast, suffer faster. The Italian racing doctrine.",
-        "subtext": "If the bike looks like a missile, you can't ride it like a commuter.",
+        "subtext": "If the bike looks like a missile, you cannot ride it like a commuter.",
         "category": QuoteCategory.BASSO_AERO,
         "source_vibe": "Bassano del Grappa // Pure Aesthetics",
         "tags": ["basso", "speed", "style", "italian-style"],
     },
+    {
+        "id": "bso-208",
+        "headline": "Designed in Veneto, tested against the stubborn headwinds of reality.",
+        "subtext": "Italian geometry does not make excuses for wind.",
+        "category": QuoteCategory.BASSO_AERO,
+        "source_vibe": "Bassano del Grappa // Veneto Lineage",
+        "tags": ["basso", "italian", "racing", "veneto"],
+    },
 
     # =========================================================================
-    # 4. PAIN CAVE & SUFFERING (Lactate threshold, VO2 Max, 4-days discipline)
+    # 4. PAIN CAVE & THRESHOLD SUFFERING (No metrics, pure suffering humor)
     # =========================================================================
     {
         "id": "pn-301",
@@ -247,7 +299,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     },
     {
         "id": "pn-302",
-        "headline": "Entered the pain cave at 5:30 AM. Renovated it, put up curtains, stayed for sprints.",
+        "headline": "Entered the pain cave at dawn. Renovated it, put up curtains, stayed for sprints.",
         "subtext": "Zone 4 is my permanent residential address.",
         "category": QuoteCategory.PAIN_CAVE,
         "source_vibe": "Pain Cave // Zone 4 Leaseholder",
@@ -256,26 +308,42 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "pn-303",
         "headline": "Breathing through my ears and pedaling with pure remorse.",
-        "subtext": "Why do we pay good money to voluntarily torture ourselves before dawn?",
+        "subtext": "Voluntary cardiovascular distress before breakfast.",
         "category": QuoteCategory.PAIN_CAVE,
         "source_vibe": "Pain Cave // Existential Suffer",
         "tags": ["suffering", "lungs", "dawn", "cycling-life"],
     },
     {
         "id": "pn-304",
-        "headline": "My Garmin asked if I wanted to record an emergency event; I said no, it’s just a 3% incline.",
+        "headline": "My bike computer asked if I had an emergency; I said no, it’s just an incline.",
         "subtext": "Cadence dropped, ego followed closely behind.",
         "category": QuoteCategory.PAIN_CAVE,
         "source_vibe": "Pain Cave // Incline Reality",
-        "tags": ["garmin", "incline", "heart-rate", "humor"],
+        "tags": ["incline", "heart-rate", "humor", "effort"],
     },
     {
         "id": "pn-305",
-        "headline": "4 days a week of voluntary cardiovascular bankruptcy.",
+        "headline": "Voluntary cardiovascular bankruptcy 4 days a week.",
         "subtext": "My alarm clock is my biggest rival, and the pedals are my court of appeals.",
         "category": QuoteCategory.PAIN_CAVE,
         "source_vibe": "Pain Cave // Consistency Irony",
         "tags": ["discipline", "consistency", "alarm", "quitting-not-an-option"],
+    },
+    {
+        "id": "pn-306",
+        "headline": "My quads are currently holding a press conference regarding working conditions.",
+        "subtext": "A general strike has been narrowly averted with promises of caffeine.",
+        "category": QuoteCategory.PAIN_CAVE,
+        "source_vibe": "Pain Cave // Quad Mutiny",
+        "tags": ["pain", "legs", "quads", "humor"],
+    },
+    {
+        "id": "pn-307",
+        "headline": "Shut up legs. You're fine.",
+        "subtext": "Jens Voigt's timeless prescription for uphill negotiations.",
+        "category": QuoteCategory.PAIN_CAVE,
+        "source_vibe": "Pain Cave // Jensie Prescription",
+        "tags": ["jens-voigt", "legs", "attitude", "grit"],
     },
 
     # =========================================================================
@@ -292,7 +360,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "wit-402",
         "headline": "If it’s not on Strava, did the lactic acid even happen?",
-        "subtext": "Phone battery survived, Garmin synced, existence validated.",
+        "subtext": "Garmin synced, satellite connected, existence validated.",
         "category": QuoteCategory.WITTY_SARCASM,
         "source_vibe": "Bike Geek // Strava Ontology",
         "tags": ["strava", "sync", "validation", "gps"],
@@ -300,7 +368,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "wit-403",
         "headline": "My diet is 70% aero denial and 30% electrolyte delusion.",
-        "subtext": "Spent 20 minutes saving 4 watts in clothing, ate two samosas later.",
+        "subtext": "Spent twenty minutes saving four watts in kit, ate pastry later.",
         "category": QuoteCategory.WITTY_SARCASM,
         "source_vibe": "Bike Geek // Aero Delusion",
         "tags": ["sarcasm", "nutrition", "aero-watts", "food"],
@@ -308,7 +376,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "wit-404",
         "headline": "I told myself I’d do a gentle recovery spin. That was a hilarious lie.",
-        "subtext": "Spotted another cyclist 200m ahead. The race was declared.",
+        "subtext": "Spotted another cyclist ahead on the road. The race was immediately declared.",
         "category": QuoteCategory.WITTY_SARCASM,
         "source_vibe": "Bike Geek // The Unspoken Race",
         "tags": ["recovery-spin", "lie", "chase", "peloton"],
@@ -321,6 +389,22 @@ RAW_QUOTES: List[Dict[str, Any]] = [
         "source_vibe": "Bike Geek // Essentials",
         "tags": ["gear", "optimism", "roadie", "humor"],
     },
+    {
+        "id": "wit-406",
+        "headline": "My bicycle costs more than my first car and complains significantly less.",
+        "subtext": "Doesn't leak oil, doesn't need insurance, only demands watts.",
+        "category": QuoteCategory.WITTY_SARCASM,
+        "source_vibe": "Bike Geek // Financial Priorities",
+        "tags": ["bike-math", "priorities", "cost", "loyalty"],
+    },
+    {
+        "id": "wit-407",
+        "headline": "Pedaling away from my responsibilities at a very respectable cadence.",
+        "subtext": "Emails cannot reach me at this velocity.",
+        "category": QuoteCategory.WITTY_SARCASM,
+        "source_vibe": "Bike Geek // Cadence Escape",
+        "tags": ["escape", "cadence", "responsibilities", "speed"],
+    },
 
     # =========================================================================
     # 6. ZEN & FILOSOFIA (Mental flow, The road, Quiet mornings)
@@ -328,7 +412,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "zen-501",
         "headline": "The rhythm of two wheels silences the noise of ten thousand thoughts.",
-        "subtext": "Sunrise over Hyderabad's skyline. Just tire hum and breath.",
+        "subtext": "Sunrise over the open horizon. Just tire hum and breath.",
         "category": QuoteCategory.ZEN_FILOSOFIA,
         "source_vibe": "Zen Road // Mindflow",
         "tags": ["zen", "mindfulness", "sunrise", "clarity"],
@@ -344,7 +428,7 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     {
         "id": "zen-503",
         "headline": "Every pedal stroke is a quiet negotiation with gravity and yourself.",
-        "subtext": "Nothing forced. Just steady cadence on smooth Italian carbon.",
+        "subtext": "Nothing forced. Just steady cadence on smooth carbon.",
         "category": QuoteCategory.ZEN_FILOSOFIA,
         "source_vibe": "Zen Road // Flow State",
         "tags": ["zen", "cadence", "harmony", "meditation"],
@@ -357,9 +441,17 @@ RAW_QUOTES: List[Dict[str, Any]] = [
         "source_vibe": "Zen Road // Pure Honesty",
         "tags": ["zen", "truth", "road", "dawn"],
     },
+    {
+        "id": "zen-505",
+        "headline": "A clean drivetrain is a quiet mind.",
+        "subtext": "Zero friction, zero clutter, pure forward momentum.",
+        "category": QuoteCategory.ZEN_FILOSOFIA,
+        "source_vibe": "Zen Road // Mechanical Meditation",
+        "tags": ["zen", "drivetrain", "silence", "meditation"],
+    },
 
     # =========================================================================
-    # 7. CHAI RECOVERY & HYDERABAD POST-RIDE RITUAL
+    # 7. CHAI RECOVERY & POST-RIDE RITUAL
     # =========================================================================
     {
         "id": "chi-601",
@@ -367,11 +459,11 @@ RAW_QUOTES: List[Dict[str, Any]] = [
         "subtext": "The only true metric that matters: Wattage-to-Chai ratio.",
         "category": QuoteCategory.CHAI_RECOVERY,
         "source_vibe": "Deccan Pelotón // Chai Pitstop",
-        "tags": ["chai", "irani-chai", "osmania", "hyderabad", "recovery"],
+        "tags": ["chai", "irani-chai", "osmania", "recovery"],
     },
     {
         "id": "chi-602",
-        "headline": "Did 45 km just to justify dipping three Osmania biscuits in double-patti chai.",
+        "headline": "Rode hard just to justify dipping three Osmania biscuits in double-patti chai.",
         "subtext": "Caloric math: 1000 burned, 1200 reclaimed with zero regrets.",
         "category": QuoteCategory.CHAI_RECOVERY,
         "source_vibe": "Deccan Pelotón // Caloric Balance",
@@ -379,16 +471,16 @@ RAW_QUOTES: List[Dict[str, Any]] = [
     },
     {
         "id": "chi-603",
-        "headline": "Niloufer pitstop: Where the Basso leans against the wall and the legs finally stop shaking.",
+        "headline": "The sacred pitstop: Where the Basso leans against the wall and the legs stop shaking.",
         "subtext": "Steam rising from the cup, sweat drying on the jersey.",
         "category": QuoteCategory.CHAI_RECOVERY,
-        "source_vibe": "Deccan Pelotón // Niloufer Sanctuary",
-        "tags": ["niloufer", "chai", "recovery", "basso", "community"],
+        "source_vibe": "Deccan Pelotón // Post-Ride Sanctuary",
+        "tags": ["chai", "recovery", "basso", "community"],
     },
     {
         "id": "chi-604",
         "headline": "Strava pause button activated solely for cutting chai protocol.",
-        "subtext": "Garmin auto-pause respects the culture.",
+        "subtext": "Auto-pause respects the culture.",
         "category": QuoteCategory.CHAI_RECOVERY,
         "source_vibe": "Deccan Pelotón // Auto-Pause Culture",
         "tags": ["auto-pause", "chai", "culture", "garmin"],

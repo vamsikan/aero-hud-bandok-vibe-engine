@@ -105,7 +105,7 @@ class QuoteGeneratorService:
         """Return human-readable metadata for all available categories."""
         labels = {
             QuoteCategory.BANDOK_CLASSIC: "Bandók Classic (Cinematic & Dry Wit)",
-            QuoteCategory.HYD_FD_GRIT: "Hyderabad FD Grit (Kokapet, Waverock, Cable Bridge)",
+            QuoteCategory.HYD_FD_GRIT: "Morning Discipline (Dawn Patrol & Grit)",
             QuoteCategory.BASSO_AERO: "Basso Venta R Aero (Italian Carbon & Speed)",
             QuoteCategory.PAIN_CAVE: "Pain Cave (Threshold Suffering & Discipline)",
             QuoteCategory.WITTY_SARCASM: "Witty Sarcasm (Strava & Cyclist Reality)",
@@ -152,33 +152,8 @@ class QuoteGeneratorService:
 
         tmpl = random.choice(matching_templates)
 
-        dist_val = f"{telemetry.distance_km:.1f}" if telemetry.distance_km else "42.5"
-        speed_val = f"{telemetry.avg_speed_kph:.1f}" if telemetry.avg_speed_kph else "31.8"
-        elev_val = f"{telemetry.elevation_m}" if telemetry.elevation_m else "260"
-        loc_val = telemetry.location or "Financial District"
-        bike_val = telemetry.bike or "Basso Venta R"
-        suffer_val = str(telemetry.suffer_score or 8)
-        chai_val = str(telemetry.chai_consumed or 2)
-
-        headline = tmpl["headline_template"].format(
-            distance=dist_val,
-            speed=speed_val,
-            elevation=elev_val,
-            location=loc_val,
-            bike=bike_val,
-            suffer=suffer_val,
-            chai_count=chai_val,
-        )
-
-        subtext = tmpl["subtext_template"].format(
-            distance=dist_val,
-            speed=speed_val,
-            elevation=elev_val,
-            location=loc_val,
-            bike=bike_val,
-            suffer=suffer_val,
-            chai_count=chai_val,
-        )
+        headline = tmpl["headline_template"]
+        subtext = tmpl.get("subtext_template", "")
 
         raw = {
             "id": f"{tmpl['id_prefix']}-{uuid.uuid4().hex[:4]}",

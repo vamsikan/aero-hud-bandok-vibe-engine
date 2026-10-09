@@ -1,4 +1,4 @@
-"""Unit tests for TelemetryFormatter."""
+"""Unit tests for TelemetryFormatter ensuring pure quote generation."""
 from app.services.telemetry import TelemetryFormatter
 from app.models.quote import RideTelemetry
 
@@ -13,7 +13,7 @@ def test_format_strava_title_length():
     assert formatted.endswith("...")
 
 
-def test_format_strava_description_with_telemetry():
+def test_format_strava_description_pure_quote():
     telemetry = RideTelemetry(
         distance_km=40.0,
         avg_speed_kph=31.5,
@@ -27,16 +27,18 @@ def test_format_strava_description_with_telemetry():
         telemetry=telemetry,
         source_vibe="Bandók Vault",
     )
-    assert "Distance: 40.0 km" in desc
-    assert "Avg Speed: 31.5 km/h" in desc
+    # Ensure pure quote without cluttering distance/elevation numbers in the quote
+    assert "Whole damn planet wanted a piece of me" in desc
     assert "#BassoVentaR" in desc
-    assert "#FinancialDistrict" in desc
+    assert "#Bandók" in desc
 
 
-def test_format_whatsapp_status():
+def test_format_whatsapp_status_pure():
     status = TelemetryFormatter.format_whatsapp_status("Aero is everything")
     assert "🚴‍♂️" in status
-    assert "#BassoVentaR" in status
+    assert "Aero is everything" in status
+    # Ensure no raw distance/speed numbers pollute the status
+    assert "km" not in status.lower()
     assert len(status) <= 139
 
 
@@ -44,17 +46,14 @@ def test_build_card_metadata():
     telemetry = RideTelemetry(
         distance_km=45.0,
         avg_speed_kph=33.0,
-        location="Knowledge City",
         bike="Basso Venta R",
     )
     meta = TelemetryFormatter.build_card_metadata(
         headline="Speed is a habit",
-        subtext="Knowledge City sprint",
+        subtext="Morning sprint",
         telemetry=telemetry,
         category="basso_aero",
         vibe="Aero Division",
     )
-    assert meta["distance"] == "45.0 KM"
-    assert meta["speed"] == "33.0 KM/H"
     assert meta["bike"] == "Basso Venta R"
     assert "timestamp" in meta
