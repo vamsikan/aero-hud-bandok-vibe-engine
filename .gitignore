@@ -22,3 +22,6 @@ wheels/
 .pytest_cache/
 .DS_Store
 .venv
+
+# Local OpenClaw delivery target
+integrations/.env

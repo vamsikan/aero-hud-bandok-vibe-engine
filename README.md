@@ -111,7 +111,49 @@ The repo ships with a `.replit` config, so hosting needs no manual setup:
 `HOST` and `PORT` are read from the environment (`app/config.py`), so the same code runs locally on
 `8000` and on Replit on `5000` with no edits. Autoreload only engages when `DEBUG=true`.
 
-### 5. Docker Deployment
+### 5. Send to WhatsApp / Telegram via OpenClaw
+
+The app only writes captions; [OpenClaw](https://docs.openclaw.ai/) owns the chat-app session and
+does the delivering. `integrations/openclaw_send.py` is the bridge: it pulls a caption from the API
+and hands it to `openclaw message send`.
+
+Because OpenClaw runs where your WhatsApp/Telegram account is paired, it *pulls* from the app. The
+hosted deployment needs no inbound access and stores no gateway token.
+
+```bash
+# One-time: install OpenClaw and pair a channel
+npm install -g openclaw
+openclaw setup
+openclaw channels add --channel whatsapp     # or: --channel telegram --token <bot-token>
+openclaw channels login --channel whatsapp   # scan the QR with your phone
+
+# Preview without delivering
+python3 -m integrations.openclaw_send --channel whatsapp --target "+91XXXXXXXXXX" \
+    --category hyd_fd_grit --km 42.5 --speed 32.8 --format chat --dry-run
+
+# Send for real, pulling from the deployed app
+AERO_API_BASE=https://<your-repl>.replit.dev \
+    python3 -m integrations.openclaw_send --channel whatsapp -t "+91XXXXXXXXXX" --format status
+```
+
+Set `AERO_API_BASE`, `OPENCLAW_CHANNEL`, and `OPENCLAW_TARGET` once (see
+`integrations/.env.example`) to drop the flags. `--format` picks which prepared caption ships:
+`title`, `full`, `status`, or `chat`. Add `--media <path-or-url>` to attach an image.
+
+**Schedule it.** OpenClaw's cron runs shell jobs on its gateway, so no model credentials are needed:
+
+```bash
+openclaw cron add "Morning Aero Caption" --cron "0 6 * * *" \
+  --command-cwd "$(pwd)" \
+  --command "./.venv/bin/python3 -m integrations.openclaw_send --category hyd_fd_grit"
+```
+
+> **Note:** OpenClaw delivers to chats, groups, and channels. Posting to the WhatsApp *Status* feed
+> is a separate surface it does not drive — use `--format status` to send that text to yourself or
+> the pelotón group, then repost if you want it on Status. The 1080x1080 HUD card is rendered in the
+> browser, so it has no server-side file for `--media`; export and pass the path manually.
+
+### 6. Docker Deployment
 ```bash
 docker compose up --build
 ```
