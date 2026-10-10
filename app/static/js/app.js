@@ -104,16 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Read current telemetry form
+  // Read current telemetry form safely
   function getTelemetryPayload() {
     return {
-      distance_km: els.inputDist.value ? parseFloat(els.inputDist.value) : null,
-      avg_speed_kph: els.inputSpeed.value ? parseFloat(els.inputSpeed.value) : null,
-      elevation_m: els.inputElev.value ? parseInt(els.inputElev.value, 10) : null,
-      location: els.inputLocation.value || 'Financial District, Hyderabad',
-      bike: els.inputBike.value || 'Basso Venta R',
-      suffer_score: els.inputSuffer.value ? parseInt(els.inputSuffer.value, 10) : 8,
-      chai_consumed: els.inputChai.value ? parseInt(els.inputChai.value, 10) : 1,
+      distance_km: els.inputDist?.value ? parseFloat(els.inputDist.value) : null,
+      avg_speed_kph: els.inputSpeed?.value ? parseFloat(els.inputSpeed.value) : null,
+      elevation_m: els.inputElev?.value ? parseInt(els.inputElev.value, 10) : null,
+      location: 'Road Pelotón',
+      bike: els.inputBike?.value || 'Basso Venta R',
+      suffer_score: 8,
+      chai_consumed: 1,
     };
   }
 

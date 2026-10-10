@@ -98,7 +98,20 @@ python3 -m app.cli --format full --km 50 --elev 320 --loc "Kokapet Solar Track"
 pytest -v
 ```
 
-### 4. Docker Deployment
+### 4. Deploy on Replit
+
+The repo ships with a `.replit` config, so hosting needs no manual setup:
+
+1. On [replit.com](https://replit.com), choose **Create Repl → Import from GitHub** and paste this repo's URL.
+2. Press **Run**. The workflow installs `requirements.txt` and starts the server on port `5000`,
+   which Replit proxies to the public `*.replit.dev` URL.
+3. For an always-on public URL, open the **Deploy** tab and publish (`deploymentTarget = "autoscale"`
+   is preconfigured).
+
+`HOST` and `PORT` are read from the environment (`app/config.py`), so the same code runs locally on
+`8000` and on Replit on `5000` with no edits. Autoreload only engages when `DEBUG=true`.
+
+### 5. Docker Deployment
 ```bash
 docker compose up --build
 ```

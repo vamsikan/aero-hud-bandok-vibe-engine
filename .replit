@@ -1,0 +1,35 @@
+# Replit configuration for AERO·HUD // Bandók Vibe Engine
+modules = ["python-3.11"]
+
+run = "python run.py"
+entrypoint = "run.py"
+
+[env]
+# Replit's webview proxies the container's port 5000 out to 80/443.
+PORT = "5000"
+HOST = "0.0.0.0"
+PYTHONUNBUFFERED = "1"
+
+[nix]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["python", "run.py"]
+build = ["pip", "install", "-r", "requirements.txt"]
+
+[workflows]
+runButton = "Run Aero HUD"
+
+[[workflows.workflow]]
+name = "Run Aero HUD"
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install -r requirements.txt && python run.py"
+waitForPort = 5000

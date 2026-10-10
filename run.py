@@ -1,14 +1,16 @@
 """Main runner script for AeroQuote / Bandók Engine."""
 import uvicorn
+
 from app.config import settings
 
 if __name__ == "__main__":
-    print(f"🚀 Starting {settings.APP_NAME} on http://localhost:{settings.PORT}")
+    print(f"🚀 Starting {settings.APP_NAME} on http://{settings.HOST}:{settings.PORT}")
     print("📍 Tailored for: Basso Venta R // Hyderabad Financial District Pelotón")
-    print("📚 API Documentation: http://localhost:8000/docs")
+    print(f"📚 API Documentation: http://{settings.HOST}:{settings.PORT}/docs")
     uvicorn.run(
         "app.main:app",
         host=settings.HOST,
         port=settings.PORT,
-        reload=True,
+        # Autoreload is a local-development convenience only; hosted runs stay stable.
+        reload=settings.DEBUG,
     )

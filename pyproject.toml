@@ -1,0 +1,13 @@
+[project]
+name = "aero-hud-bandok-vibe-engine"
+version = "2.0.4"
+description = "Futuristic cycling caption & telemetry engine for Strava and WhatsApp"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.8.0",
+    "jinja2>=3.1.4",
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+]

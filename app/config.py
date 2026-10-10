@@ -1,4 +1,5 @@
 """Application configuration and constants."""
+import os
 from typing import List
 from pydantic import BaseModel
 
@@ -7,9 +8,10 @@ class Settings(BaseModel):
     """Core settings for AeroQuote / Bandók Engine."""
     APP_NAME: str = "AERO·HUD // Bandók Vibe Engine"
     VERSION: str = "2.0.4-aero"
-    DEBUG: bool = False
-    HOST: str = "0.0.0.0"
-    PORT: int = 8000
+    # Hosting platforms (Replit, Render, Fly, Heroku) inject these at runtime.
+    DEBUG: bool = os.getenv("DEBUG", "").lower() in {"1", "true", "yes"}
+    HOST: str = os.getenv("HOST", "0.0.0.0")
+    PORT: int = int(os.getenv("PORT", "8000"))
     
     # Default rider profile
     DEFAULT_BIKE: str = "Basso Venta R"
